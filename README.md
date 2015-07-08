@@ -12,9 +12,9 @@ Auto installed when you add your cordova platform :
 # Install
 
 ```sh
-git clone revolunet/cordova-contentsync-demo.git
+git clone git@github.com:revolunet/cordova-contentsync-demo.git
 cd cordova-contentsync-demo
-cordova create .
+mkdir platforms hooks plugins
 cordova platform add ios
-cordova prepare && cordova emulate
+cordova emulate
 ```
