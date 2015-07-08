@@ -1,0 +1,56 @@
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>ContentSync + WkWebView plugin demo</title>
+        <style>
+        body {
+            padding-top:100px;
+            background: white;
+        }
+        button {
+            font-size:20px;
+        }
+        </style>
+    </head>
+    <body>
+        <h1>ContentSync + WkWebView plugin demo</h1>
+        <p>
+            Download+Extract remote ZIP, cache content locally and use local files in browser.
+        </p>
+        <button onclick="startSync()">startSync</button>
+        <div id="status"></div>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script>
+            function startSync() {
+                var url = "http://bouquillon.com/sample.zip",
+                    localFolder = 'programs/xxx-3';
+
+                var sync = ContentSync.sync({
+                    src: url,
+                    id: localFolder,
+                    type: 'local',
+                    copyCordovaAssets: false,
+                    headers: false
+                });
+
+                sync.on('progress', function(data) {
+                    console.log("Progress event", data);
+                    document.getElementById('status').innerHTML = 'progress: ' + data.progress + '%';
+                });
+                sync.on('complete', function(data) {
+                    console.log("Complete", data);
+                    var i = document.createElement('img');
+                    document.body.appendChild(i);
+                    i.src = '/Library/files/' + localFolder + '/sample/giphy.gif'
+                    document.getElementById('status').innerHTML = 'complete';
+                });
+
+                sync.on('error', function(e) {
+                    console.log("Something went wrong: ", e);
+                    document.getElementById('status').innerHTML = 'Error: ' + e;
+                });
+            }
+        </script>
+    </body>
+</html>
