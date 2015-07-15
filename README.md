@@ -16,5 +16,10 @@ git clone git@github.com:revolunet/cordova-contentsync-demo.git
 cd cordova-contentsync-demo
 mkdir platforms hooks plugins
 cordova platform add ios
+```
+
+# Build/Test
+
+```
 cordova emulate
 ```
